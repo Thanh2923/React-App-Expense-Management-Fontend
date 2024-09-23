@@ -1,0 +1,87 @@
+{
+  "categories": [
+    {
+      "id": "2",
+      "name": "Thực Phẩm"
+    },
+    {
+      "id": "3",
+      "name": "Giải Trí"
+    },
+    {
+      "id": "4",
+      "name": "Đi Lại"
+    },
+    {
+      "id": "4",
+      "name": "Giáo Dục"
+    }
+  ],
+  "fixedExpenses": [
+    {
+      "id": "8f8b",
+      "name": "Tiền Điện",
+      "amount": 300000
+    },
+    {
+      "id": "3c23",
+      "name": "Tiền Nước",
+      "amount": 100000
+    },
+    {
+      "id": "22d4",
+      "name": "Tiền Thuê Trọ",
+      "amount": 1500000
+    },
+    {
+      "id": "6df6",
+      "name": "Tiền Wifi",
+      "amount": 150000
+    }
+  ],
+  "expenseTracking": [
+    {
+      "id": "074a",
+      "name": "Tiền Xăng Xe",
+      "amountInt": 50000,
+      "date": "2024-08-05",
+      "description": "Tiền xăng xe ",
+      "category": "Đi Lại"
+    },
+    {
+      "id": "1247",
+      "name": "Tiền Ăn",
+      "amountInt": 70000,
+      "date": "2024-08-05",
+      "description": "Tiền ăn sáng, trưa , tối",
+      "category": "Thực Phẩm"
+    },
+    {
+      "id": "bf23",
+      "name": "Tiền Uống Nước",
+      "amountInt": 20000,
+      "date": "2024-08-05",
+      "description": "Tiền uống nước",
+      "category": "Giải Trí"
+    }
+  ],
+  "budgetSettings": [
+    {
+      "id": "1",
+      "name": "Food & Drinks",
+      "categoryId": 1,
+      "amount": 3000000,
+      "category": "Thực Phẩm"
+    },
+    {
+      "id": "748c",
+      "category": "Giải Trí",
+      "amount": 1000000
+    },
+    {
+      "id": "0472",
+      "category": "Đi Lại",
+      "amount": 600000
+    }
+  ]
+}

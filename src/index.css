@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.form-expensefixed{
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    z-index: 30;
+  
+    
+}
