@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-# React + Vite
+chạy api bằnG lệnh  cd api-json-sever
+npm run start-auth và npx json-server --watch db.json
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-=======
-# quanlychitieu
->>>>>>> 6027f9c6f2feb8e86413f419bba5bc0a1dd41b4b
+chạy web bằng npm run dev
