@@ -28,7 +28,7 @@
     "react-router-dom": "^6.26.0",
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.7",
-    "sort-by": "^1.2.0",
+    "sort-by": "^0.0.2",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
