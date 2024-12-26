@@ -1,20 +1,26 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNewExpense } from '../../../../redux/ExpenseFixed_Thunk';
-import {  toast } from 'react-hot-toast';
-import email from '../../../../redux/Get_email';
+import { toast } from 'react-toastify';
 const AddExpenseFixed = ({ onClose }) => {
   const [expenseName, setExpenseName] = useState('');
   const [amount, setAmount] = useState('');
   const dispatch = useDispatch();
-
+ const [user,setUser] =  useState(null)
+   useEffect(() => {
+     const storedUser = localStorage.getItem('user');
+     if (storedUser!==null) {
+       setUser(JSON.parse(storedUser));
+     }else{
+       setUser("user")
+     }
+   }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
     let amountInt = parseInt(amount)
-    dispatch(addNewExpense({ name: expenseName, amount:amountInt, email:email })).then(() => {
+    dispatch(addNewExpense({ name: expenseName, amount:amountInt, email:user.email }))
       toast.success('Thêm mới thành công !')
-      onClose(); // Close form after submitting
-    });
+      onClose(); 
   };
 
   return (

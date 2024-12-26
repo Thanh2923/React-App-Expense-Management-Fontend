@@ -5,44 +5,87 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBudgetSettings, deleteBudgetSettingById } from '../../../../redux/BudgetSetting_Thunk'
 import AddTrackExpense from './AddTrackExpense';
 import EditTrackExpense from './EditTrackExpense';
-import {  toast } from 'react-hot-toast';
-import email from '../../../../redux/Get_email';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import ConfirmDelete from '../ConfirmDelete';
+import LoginReminder from '../LoginReminder';
 const TableBudgetSettings = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingExpense, setEditingExpense] = useState(null);
+  const [idItem,setIdItem] = useState(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
   const dispatch = useDispatch();
-  const budgetSettingsAll = useSelector((state) => state.budget.budgetSettings);
-   const budgetSettings = budgetSettingsAll && email 
-    ? budgetSettingsAll.filter(item => item.email === email) 
-    : [];
+  const budgetSettings = useSelector((state) => state.budget.budgetSettings);
+  const [isVisible, setIsVisible] = useState(false); // State để điều khiển việc ẩn thông báo
+  const [user,setUser] =  useState(null)
+    useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser!==null) {
+        setUser(JSON.parse(storedUser));
+      }else{
+        setUser("user")
+      }
+    }, []);
+  const handleShowReminder = () => {
+    setIsVisible(true);
+  };
   const formatNumber = (number) => {
     return number.toLocaleString('vi-VN');
   };
   useEffect(() => {
-    dispatch(getBudgetSettings());
-  }, [dispatch]);
+   if(user){
+    if( user.email){
+      dispatch(getBudgetSettings(user.email));
+    }else{
+      dispatch(getBudgetSettings());
+    }
+   }
+
+  }, [user,dispatch]);
 
   const handleEdit = (expense) => {
     setEditingExpense(expense);
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteBudgetSettingById(id));
-    toast.success("Xóa thành công !")
+  const handleDelete = ()=>{
+    dispatch(deleteBudgetSettingById(idItem))
+    toast.success("Xoá thành công !");
+    closeModal()
+  }
+  const handleOpenModal = (id) => {
+    setIdItem(id)
+    openModal();
   };
+  
+
 
   const handleSave = (updatedExpense) => {
     setEditingExpense(null);
   };
 
   return (
+    
     <div className="container mx-auto p-4">
-      <button
-        onClick={() => setShowForm(true)}
-        className="bg-amber-500 text-white px-4 py-2 mb-6 rounded mr-2"
-      >
-        Thêm Mới Ngân Sách
-      </button>
+      <ToastContainer/>
+      <LoginReminder isVisible={isVisible} setIsVisible={setIsVisible}/>
+            <ConfirmDelete isOpen={isOpen} closeModal={closeModal} handleDelete={handleDelete}/>
+     {user && user?.email ? 
+     <button
+     onClick={() => setShowForm(true)}
+     className="bg-amber-500 text-white px-4 py-2 mb-6 rounded mr-2"
+   >
+     Thêm Mới Ngân Sách
+   </button> 
+   :
+   <button
+   onClick={handleShowReminder}
+   className="bg-amber-500 text-white px-4 py-2 mb-6 rounded mr-2"
+ >
+   Thêm Mới Ngân Sách
+ </button> 
+    }
       {showForm && <AddTrackExpense onClose={() => setShowForm(false)} />}
       {editingExpense && (
         <EditTrackExpense
@@ -61,24 +104,42 @@ const TableBudgetSettings = () => {
           </tr>
         </thead>
         <tbody>
-          {budgetSettingsAll.map((expense) => (
-            <tr key={expense.id} className="text-center border-b">
-              <td className="py-2">{expense.id}</td>
+          {budgetSettings.map((expense,index) => (
+            <tr key={index} className="text-center border-b">
+              <td className="py-2">{index+1}</td>
               <td className="py-2">{expense.category}</td>
-              <td className="py-2">{formatNumber(expense.amount)}</td>
+              <td className="py-2">{formatNumber(expense.amount ? expense.amount : 0)}</td>
               <td className="py-2 flex">
-                <button
+                {user && user?.email? <>
+                  <button
                   onClick={() => handleEdit(expense)}
                   className="bg-slate-600 text-white px-4 py-2 rounded mr-2"
                 >
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDelete(expense.id)}
+                  onClick={() => handleOpenModal(expense._id)}
                   className="bg-red-500 text-white px-4 py-2 rounded"
                 >
                   Delete
                 </button>
+                </>
+              : 
+              <>
+              <button
+                   onClick={handleShowReminder}
+                  className="bg-slate-600 text-white px-4 py-2 rounded mr-2"
+                >
+                  Edit
+                </button>
+                <button
+                   onClick={handleShowReminder}
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Delete
+                </button>
+              </>  
+              }
               </td>
             </tr>
           ))}

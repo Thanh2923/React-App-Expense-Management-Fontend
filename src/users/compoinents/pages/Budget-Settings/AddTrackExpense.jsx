@@ -4,24 +4,30 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewBudgetSetting } from '../../../../redux/BudgetSetting_Thunk';
 import { getData } from '../../../../redux/Category_Thunk';
-import {  toast } from 'react-hot-toast';
-import email from '../../../../redux/Get_email';
+import { toast } from 'react-toastify';
 const AddTrackExpense = ({ onClose }) => {
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
   const dispatch = useDispatch();
-  const Categoryq = useSelector(state => state.Category.Category);
-  let email = localStorage.getItem("Email");
-  const Category =Categoryq && email 
-  ? Categoryq.filter(item => item.email === email) 
-  : [];
+  const Category = useSelector(state => state.Category.Category);
+  const [user,setUser] =  useState(null)
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser!==null) {
+      setUser(JSON.parse(storedUser));
+    }else{
+      setUser("user")
+    }
+  }, []);
   useEffect(()=>{
-     dispatch(getData())
-  },[dispatch])
+    if(user && user.email){
+      dispatch(getData(user.email))
+    }
+  },[user,dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addNewBudgetSetting({ category, amount: parseFloat(amount) ,email:email}));
+    dispatch(addNewBudgetSetting({ category, amount: parseFloat(amount) ,email:user.email}));
     toast.success("Thêm mới thành công !")
     onClose();
   };
@@ -48,6 +54,9 @@ const AddTrackExpense = ({ onClose }) => {
               className="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
               required
             >
+              <option value="" disabled>
+      Chọn loại chi phí
+    </option>
              {Category.map((cat) => (
                 <option key={cat.id} value={cat.name}>
                   {cat.name}
@@ -60,7 +69,7 @@ const AddTrackExpense = ({ onClose }) => {
               Tiền
             </label>
             <input
-              type="number"
+              type="text"
               id="amount"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               value={amount}

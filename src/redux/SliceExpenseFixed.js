@@ -12,27 +12,31 @@ const initialState = {
     fetchDataExpenseFixed(state, action) {
       state.ExpenseFixed = action.payload;
     },
+    fetchTotalExpenseFixedByEmail(state, action) {
+      state.ExpenseFixed = action.payload;
+    },
     addExpenseFixed(state, action) {
-      state.ExpenseFixed = [...state.ExpenseFixed, action.payload];
+      state.ExpenseFixed = [...state.ExpenseFixed, action.payload.data];
     },
     editExpenseFixed(state, action) {
-      const index = state.ExpenseFixed.findIndex(expense => expense.id === action.payload.id);
-       index ?  state.ExpenseFixed[index] = action.payload : state.ExpenseFixed
-       
-      
+      const updatedCategories = state.ExpenseFixed.map(ExpenseFixed =>
+        ExpenseFixed._id === action.payload.data._id 
+          ? action.payload.data  // Thay thế ExpenseFixed cũ bằng ExpenseFixed mới
+          : ExpenseFixed  // Giữ nguyên ExpenseFixed cũ nếu không trùng khớp
+      );
+    
+      // Trả về state mới với mảng đã cập nhật
+      return {
+        ...state,
+        ExpenseFixed: updatedCategories,
+      };
     },
     deleteExpenseFixed(state, action) {
-      state.ExpenseFixed = state.ExpenseFixed.filter(expense => expense.id !== action.payload);
+      state.ExpenseFixed = state.ExpenseFixed.filter(expense => expense._id !== action.payload);
     },
-    addTatal(state,action) {
-      state.Tatal = action.payload
-    },
-    getTatal(state) {
-      const total = state.ExpenseFixed.reduce((sum, expense) => sum + expense.amount, 0);
-      state.Tatal = total;
-    }
+
   
   }
 })
 
-export const { fetchDataExpenseFixed,getTatal, addExpenseFixed, editExpenseFixed,  addTatal, deleteExpenseFixed }  = SliceExpenseFixed.actions
+export const { fetchDataExpenseFixed,fetchTotalExpenseFixedByEmail, addExpenseFixed, editExpenseFixed, deleteExpenseFixed }  = SliceExpenseFixed.actions

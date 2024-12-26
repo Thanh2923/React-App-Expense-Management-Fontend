@@ -2,11 +2,15 @@
 
 import axios from "axios";
 import { addBudgetSetting, deleteBudgetSetting, editBudgetSetting, fetchBudgetSettings } from "./SliceBudgetSetting";
-
-export function getBudgetSettings() {
+const apiUrl = import.meta.env.VITE_API_URL;  
+export function getBudgetSettings(email) {
   return async (dispatch) => {
     try {
-      const res = await axiost(`http://localhost:3000/budgetSettings`);
+      const res = await axios.get(`${apiUrl}/budgetSettings`,
+        {
+          params: { email }
+        }
+      );
       dispatch(fetchBudgetSettings(res.data));
     } catch (error) {
       console.log(error);
@@ -17,7 +21,7 @@ export function getBudgetSettings() {
 export function addNewBudgetSetting(budgetSetting) {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://localhost:3000/budgetSettings`, budgetSetting);
+      const res = await axios.post(`${apiUrl}/budgetSettings`, budgetSetting);
       dispatch(addBudgetSetting(res.data));
     } catch (error) {
       console.log(error);
@@ -28,7 +32,7 @@ export function addNewBudgetSetting(budgetSetting) {
 export function updateBudgetSetting(budgetSetting) {
   return async (dispatch) => {
     try {
-      const res = await axios.put(`http://localhost:3000/budgetSettings/${budgetSetting.id}`, budgetSetting);
+      const res = await axios.put(`${apiUrl}/budgetSettings/${budgetSetting._id}`, budgetSetting);
       dispatch(editBudgetSetting(res.data));
     } catch (error) {
       console.log(error);
@@ -39,7 +43,7 @@ export function updateBudgetSetting(budgetSetting) {
 export function deleteBudgetSettingById(id) {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:3000/budgetSettings/${id}`);
+      await axios.delete(`${apiUrl}/budgetSettings/${id}`);
       dispatch(deleteBudgetSetting(id));
     } catch (error) {
       console.log(error);

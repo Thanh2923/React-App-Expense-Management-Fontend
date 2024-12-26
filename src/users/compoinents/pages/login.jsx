@@ -5,37 +5,48 @@ import logo_gg from '../../../assets/logo_gg.png';
 import logo_ap from '../../../assets/logo_ap.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LoginGoogle from '../../../loginGoogle';
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  const apiUrl = import.meta.env.VITE_API_URL;  
+  
+  try {
+    let res = await axios.post(`${apiUrl}/auth/login`, {
+      email,
+      password,
+    });
+    
+    // Lấy user và token từ phản hồi
+    const user = res.data.user;
+    const token = res.data.token;
 
-    try {
-      let res = await axios.post('http://localhost:8000/auth/login', {
-        email,
-        password,
-      });
-      let access_token = res.data.access_token;
-      let Email = res.data.email;
-      localStorage.setItem('access_token', access_token);
-      localStorage.setItem('Email', Email);
-      // localStorage.setItem('email', userEmail); // Lưu email vào local storage
-      toast.success('Đăng nhập thành công!');
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-      toast.error('Vui lòng kiểm tra lại thông tin!');
-    }
-  };
+    // Lưu thông tin vào localStorage
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user)); // Lưu dưới dạng chuỗi JSON
+
+    // Có thể hiển thị thông báo thành công và điều hướng tới trang chủ
+    toast.success('Đăng nhập thành công!');
+    setTimeout(()=>{
+      navigate('/'); // Điều hướng tới trang chính hoặc trang mà bạn muốn
+    },2000)
+  } catch (error) {
+    console.log(error);
+    toast.error('Vui lòng kiểm tra lại thông tin!');
+  }
+};
+
 
   return (
     <>
       <div className="flex">
+        <ToastContainer/>
         <div className="w-[60%] h-[100vh] bg-red-400">
           <img src={login} className="w-[100%] h-[100vh]" alt="Login" />
         </div>
@@ -82,7 +93,7 @@ function Login() {
               </div>
             </form>
 
-            <div className="or-continue-with flex w-[70%] m-auto">
+            <div className="or-continue-with mb-5 flex w-[70%] m-auto">
               <div className="or-line w-[30%] mt-3 h-[2px] bg-black z-40" style={{ background: 'linear-gradient(to left top, black, pink)' }}></div>
               <div className="w-[35%] text-center">
                 <h6>Hoặc với</h6>
@@ -90,21 +101,13 @@ function Login() {
               <div className="or-line w-[32%] mt-3 h-[2px] bg-black z-40" style={{ background: 'linear-gradient(to left top, black, pink)' }}></div>
             </div>
 
-            <div className="w-[70%] m-auto justify-between flex mt-5 rounded-[10px]">
-              <div className="icon-google w-[20%] hover:cursor-pointer rounded-[10px] h-[50px] border-2 border-white p-2 flex items-center justify-center">
-                <img src={logo_gg} className="w-[70%] h-[30px]" alt="Google" />
-              </div>
-
-              <div className="icon-google w-[20%] hover:cursor-pointer rounded-[10px] h-[50px] border-2 border-white p-2 flex items-center justify-center">
-                <img src={logo_ap} className="w-[70%] h-[30px]" alt="Apple" />
-              </div>
-              <div className="icon-google w-[20%] hover:cursor-pointer rounded-[10px] h-[50px] border-2 border-white p-2 flex items-center justify-center">
-                <img src={logo_fb} className="w-[70%] h-[30px]" alt="Facebook" />
-              </div>
+            <div className="w-[70%] m-auto   rounded-[10px]">
+              <LoginGoogle/>
+           
             </div>
 
             <div className="login-now text-center mt-8">
-              <a href="/Login" className="text-blue-700 underline">
+              <a href="/register" className="text-blue-700 underline">
                 Đăng Kí
               </a>
             </div>

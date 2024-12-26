@@ -4,7 +4,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getData } from '../../../redux/TrackExpense_Thunk';
-import email from '../../../redux/Get_email';
+import email from '../../../redux/Get_user';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28DFF', '#FF5A5F', '#FF7A45', '#00A8E8', '#F1E189', '#FF4949', '#85C1E9', '#F5B041'];
 

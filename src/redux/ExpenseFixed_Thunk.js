@@ -1,12 +1,31 @@
 import axios from 'axios';
 import { addExpenseFixed, editExpenseFixed, deleteExpenseFixed, fetchDataExpenseFixed } from './SliceExpenseFixed';
-
-export function getDataExpenseFixed() {
+const apiUrl = import.meta.env.VITE_API_URL;  
+export function getDataExpenseFixed(email) {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`http://localhost:3000/fixedExpenses`);
+      const res = await axios.get(`${apiUrl}/fixedExpense`,
+        {
+          params: { email }
+        }
+      );
       const data = res.data;
       dispatch(fetchDataExpenseFixed(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+export function getTotalExpenseFixedByEmail(email) {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get(`${apiUrl}/fixedExpense`,
+        {
+          params: { email }
+        }
+      );
+      const data = res.data;
+      dispatch(fetchTotalExpenseFixedByEmail(data));
     } catch (error) {
       console.error(error);
     }
@@ -16,7 +35,7 @@ export function getDataExpenseFixed() {
 export function addNewExpense(expense) {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`http://localhost:3000/fixedExpenses`, expense);
+      const res = await axios.post(`${apiUrl}/fixedExpense`, expense);
       const newExpense = res.data;
       dispatch(addExpenseFixed(newExpense));
     } catch (error) {
@@ -28,7 +47,7 @@ export function addNewExpense(expense) {
 export function updateExpense(expense) {
   return async (dispatch) => {
     try {
-      const res = await axios.put(`http://localhost:3000/fixedExpenses/${expense.id}`, expense);
+      const res = await axios.put(`${apiUrl}/fixedExpense/${expense._id}`, expense);
       const updatedExpense = res.data;
       dispatch(editExpenseFixed(updatedExpense));
     } catch (error) {
@@ -40,7 +59,7 @@ export function updateExpense(expense) {
 export function deleteExpenseId(id) {
   return async (dispatch) => {
     try {
-      await axios.delete(`http://localhost:3000/fixedExpenses/${id}`);
+      await axios.delete(`${apiUrl}/fixedExpense/${id}`);
       dispatch(deleteExpenseFixed(id));
     } catch (error) {
       console.error(error);

@@ -12,16 +12,18 @@ const initialState = {
       state.TrackExpense = action.payload;
     },
     addTrackExpense(state, action) {
-      state.TrackExpense = [...state.TrackExpense, action.payload];
+      state.TrackExpense.data = [...state.TrackExpense.data, action.payload.data];
     },
     editTrackExpense(state, action) {
-      const index = state.TrackExpense.findIndex(expense => expense.id === action.payload.id);
-        index ? state.TrackExpense[index] = action.payload : state.TrackExpense
-        
+      state.TrackExpense.data = state.TrackExpense.data.map(TrackExpense =>
+        TrackExpense._id === action.payload.data._id
+          ? action.payload.data  // Thay thế phần tử cũ bằng phần tử mới
+          : TrackExpense  // Giữ nguyên phần tử cũ nếu không trùng khớp
+      );
      
     },
     deleteTrackExpense(state, action) {
-      state.TrackExpense = state.TrackExpense.filter(expense => expense.id !== action.payload);
+      state.TrackExpense.data = state.TrackExpense.data.filter(expense => expense._id !== action.payload.data._id);
     } }
   },
 )

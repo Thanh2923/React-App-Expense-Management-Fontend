@@ -1,22 +1,31 @@
 import axios from "axios";
 import {  fetchData, addTrackExpense,  editTrackExpense,  deleteTrackExpense } from "./SliceTrackExpense";
-
-export function getData() {
+const apiUrl = import.meta.env.VITE_API_URL;  
+export function getData({ email, page,limit }) {
   return async (dispatch) => {
     try {
-      let res = await axios.get(`http://localhost:3000/expenseTracking`);
+      let params = {};
+
+      // Thêm email và page vào params nếu chúng tồn tại
+      if (email) params.email = email;
+      if (page) params.page = page;
+      if (limit) params.limit = limit;
+
+      // Gửi yêu cầu với params
+      let res = await axios.get(`${apiUrl}/expenseTracking`, { params });
+
       let data = res.data;
-      dispatch(fetchData(data));
+      dispatch(fetchData(data)); // Gửi dữ liệu tới reducer
     } catch (error) {
-      console.log(error);
+      console.error("Lỗi khi lấy dữ liệu:", error);
     }
   };
 }
 
-export function addNewTrackExpense(TrackExpense) {
+export function addNewTrackExpense(dataExpense) {
   return async (dispatch) => {
     try {
-      let res = await axios.post(`http://localhost:3000/expenseTracking`, TrackExpense);
+      let res = await axios.post(`${apiUrl}/expenseTracking`, dataExpense);
       let newTrackExpense = res.data;
       dispatch(addTrackExpense(newTrackExpense));
     } catch (error) {
@@ -25,10 +34,10 @@ export function addNewTrackExpense(TrackExpense) {
   };
 }
 
-export function updateTrackExpense(TrackExpense) {
+export function updateTrackExpense(updatedData) {
   return async (dispatch) => {
     try {
-      let res = await axios.put(`http://localhost:3000/expenseTracking/${TrackExpense.id}`, TrackExpense); // Use PUT method here
+      let res = await axios.put(`${apiUrl}/expenseTracking/${updatedData._id}`, updatedData); // Use PUT method here
       let updatedTrackExpense = res.data;
       dispatch(editTrackExpense(updatedTrackExpense));
     } catch (error) {
@@ -39,7 +48,7 @@ export function updateTrackExpense(TrackExpense) {
 export function deleteTrackExpenseid(id) {
   return async (dispatch) => {
     try {
-      let res = await axios.delete(`http://localhost:3000/expenseTracking/${id}`); // Use PUT method here
+      let res = await axios.delete(`${apiUrl}/expenseTracking/${id}`); // Use PUT method here
       let updatedCategory = res.data;
       dispatch(deleteTrackExpense(updatedCategory));
     } catch (error) {

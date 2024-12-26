@@ -1,16 +1,22 @@
 import { Outlet,useLocation } from "react-router-dom"
 import Sidebar from "./users/compoinents/layouts/sidebar"
-import ChartColums from "./users/compoinents/pages/Chart-Colums/ChartColums";
+import MainHome from "./MainHome";
+import LoginGoogle from "./loginGoogle";
 
 function App() {
     const location = useLocation();
     return (
    <>
-   <Sidebar/>
-    <div className="w-[80%] m-auto ">
-    {location.pathname === '/' && <ChartColums/>}
-    </div>
+  <div className="w-full h-[100vh] bg-slate-50">
+  <Sidebar/>
+    <div className="w-full mt-[60px]  bg-slate-50 ">
+    {location.pathname === '/' && <MainHome/>}
+  
    <Outlet/>
+  
+    </div>
+  </div>
+  
 
    </>
     )

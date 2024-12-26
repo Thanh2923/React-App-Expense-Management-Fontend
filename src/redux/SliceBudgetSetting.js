@@ -12,16 +12,24 @@ const initialState = {
       state.budgetSettings = action.payload;
     },
     addBudgetSetting(state, action) {
-      state.budgetSettings.push(action.payload);
+      state.budgetSettings.push(action.payload.data);
     },
     editBudgetSetting(state, action) {
-      const index = state.budgetSettings.findIndex(item => item.id === action.payload.id);
-      if (index !== -1) {
-        state.budgetSettings[index] = action.payload;
-      }
+      const updatedbudgetSettings = state.budgetSettings.map(budgetSettings =>
+        budgetSettings._id === action.payload.data._id 
+          ? action.payload.data  // Thay thế budgetSettings cũ bằng budgetSettings mới
+          : budgetSettings  // Giữ nguyên budgetSettings cũ nếu không trùng khớp
+      );
+    
+      // Trả về state mới với mảng đã cập nhật
+      return {
+        ...state,
+        budgetSettings: updatedbudgetSettings,
+      };
     },
     deleteBudgetSetting(state, action) {
-      state.budgetSettings = state.budgetSettings.filter(item => item.id !== action.payload);
+      console.log(action.payload)
+      state.budgetSettings = state.budgetSettings.filter(item => item._id !== action.payload);
     },
 
   },

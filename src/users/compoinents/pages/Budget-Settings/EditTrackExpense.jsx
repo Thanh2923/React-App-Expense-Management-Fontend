@@ -1,26 +1,19 @@
-// EditTrackExpense.js
-import {  toast } from 'react-hot-toast';
 
 import { useState, useEffect } from 'react';
 import { updateBudgetSetting } from '../../../../redux/BudgetSetting_Thunk';
 import { useDispatch, useSelector } from 'react-redux'
 import { getData } from '../../../../redux/Category_Thunk';
-import email from '../../../../redux/Get_email';
+import useUser from '../../../../redux/Get_user';
+import { toast } from 'react-toastify';
 const EditTrackExpense = ({ expense, onClose }) => {
+  const { user, saveUser, removeUser } = useUser();
   const [category, setCategory] = useState(expense.category);
   const [amount, setAmount] = useState(expense.amount);
   const dispatch = useDispatch();
-  const Categoryq = useSelector((state)=>state.Category.Category)
-  const Category =Categoryq && email 
-  ? Categoryq.filter(item => item.email === email) 
-  : [];
-  useEffect(() => {
-    dispatch(getData())
-  }, [dispatch]);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateBudgetSetting({ ...expense, category, amount: parseFloat(amount) }));
+    dispatch(updateBudgetSetting({ ...expense, category, amount: parseInt(amount) , email:user.email }));
     toast.success("Cập nhật thành công !")
     onClose();
   };
@@ -47,11 +40,11 @@ const EditTrackExpense = ({ expense, onClose }) => {
               className="shadow-sm appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
               required
             >
-              {Category.map((cat) => (
-                <option key={cat.id} value={cat.name}>
-                  {cat.name}
+              
+                <option key=""  value={category}>
+                  {category}
                 </option>
-              ))}
+              
              
             </select>
           </div>
@@ -60,7 +53,7 @@ const EditTrackExpense = ({ expense, onClose }) => {
               Tiền
             </label>
             <input
-              type="number"
+              type="text"
               id="amount"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               value={amount}

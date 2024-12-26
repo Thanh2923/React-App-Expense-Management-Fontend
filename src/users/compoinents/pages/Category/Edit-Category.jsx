@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCategory } from '../../../../redux/Category_Thunk'; // Correctly import your thunk
-import {  toast } from 'react-hot-toast';
+
+import { toast } from 'react-toastify';
 
 export default function EditCategory({ expense, onClose }) {
   const [categoryName, setCategoryName] = useState(expense.name);
@@ -13,6 +14,7 @@ export default function EditCategory({ expense, onClose }) {
       ...expense,
       name: categoryName,
     };
+   
     dispatch(updateCategory(updatedExpense));
     toast.success("Cập nhật thành công !")
     onClose();

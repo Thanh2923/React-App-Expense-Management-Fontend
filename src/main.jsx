@@ -21,7 +21,6 @@ import TableCategorys from './users/compoinents/pages/Category/Table-Category.js
 import Register from './users/compoinents/pages/register.jsx'
 import Login from './users/compoinents/pages/login.jsx'
 import TableBudgetSettings from './users/compoinents/pages/Budget-Settings/Table-BudgetSettings.jsx'
-import TableTotalExpense from './users/compoinents/pages/Total-Expense/TableTotalExpense.jsx'
 import { Store } from './redux/store.js'
 
 
@@ -66,10 +65,7 @@ const router = createBrowserRouter([
         path:"Budget-Settings",
         element: <TableBudgetSettings/>
       },
-      {
-        path:"Total-Expense",
-        element: <TableTotalExpense/>
-      },
+
     
 
     ]

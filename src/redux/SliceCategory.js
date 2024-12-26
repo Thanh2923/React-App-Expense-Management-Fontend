@@ -12,16 +12,23 @@ export const SliceCategory = createSlice({
       state.Category = action.payload;
     },
     addCategory(state, action) {
-      state.Category = [...state.Category, action.payload];
+      state.Category = [...state.Category, action.payload.category];
     },
     editCategory(state, action) {
-      const index = state.Category.findIndex(category => category.id === action.payload.id);
-      index ? state.Category[index] = action.payload : state.Category
-      
-      
+      const updatedCategories = state.Category.map(category =>
+        category._id === action.payload.updatedCategory._id 
+          ? action.payload.updatedCategory  // Thay thế category cũ bằng category mới
+          : category  // Giữ nguyên category cũ nếu không trùng khớp
+      );
+    
+      // Trả về state mới với mảng đã cập nhật
+      return {
+        ...state,
+        Category: updatedCategories,
+      };
     },
     deleteCategory(state, action) {
-      state.Category = state.Category.filter(category => category.id !== action.payload);
+      state.Category = state.Category.filter(category => category._id !== action.payload.category._id);
     },
     
   },

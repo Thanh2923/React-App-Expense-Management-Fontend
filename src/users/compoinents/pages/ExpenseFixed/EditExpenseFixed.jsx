@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateExpense } from '../../../../redux/ExpenseFixed_Thunk';
-import {  toast } from 'react-hot-toast';
 
+import {  toast } from 'react-toastify';
 const EditExpenseFixed = ({ expense, onClose }) => {
   const [expenseName, setExpenseName] = useState(expense.name);
   const [amount, setAmount] = useState(expense.amount);

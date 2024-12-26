@@ -5,8 +5,9 @@ import { SliceExpenseFixed } from './SliceExpenseFixed'
 import { SliceTrackExpense } from './SliceTrackExpense'
 import { SliceCategory } from './SliceCategory'
 import { SliceUsers } from './SliceUsers'
+import { SliceTotal } from './SliceTotal'
 
-const Reducer = combineSlices(SliceBudgetSetting,SliceUsers,SliceExpenseFixed,SliceTrackExpense,SliceCategory)
+const Reducer = combineSlices(SliceBudgetSetting,SliceUsers,SliceExpenseFixed,SliceTrackExpense,SliceTotal,SliceCategory)
 export const Store = configureStore({
     reducer : Reducer
 })

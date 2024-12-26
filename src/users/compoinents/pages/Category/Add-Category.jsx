@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { addNewCategory } from '../../../../redux/Category_Thunk';
 import { useDispatch  } from 'react-redux'
-import {  toast } from 'react-hot-toast';
-import email from '../../../../redux/Get_email';
+import { toast } from 'react-toastify';
+
 
 const AddCategory = ({ onClose }) => {
   let dispatch = useDispatch();
+  const [user,setUser] =  useState(null)
   const [expenseName, setExpenseName] = useState('');
   
+    useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser!==null) {
+        setUser(JSON.parse(storedUser));
+      }else{
+        setUser("user")
+      }
+    }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (expenseName.trim()) {
+      
       dispatch(addNewCategory({
-        name: expenseName }));
+        name: expenseName , email:user.email }));
         toast.success("Thêm mới thành công !")
         onClose()
       setExpenseName('');}
