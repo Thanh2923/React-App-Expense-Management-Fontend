@@ -9,7 +9,7 @@ export function getTotalExpenseFixedByEmail(email) {
 
       // Thêm email và page vào params nếu chúng tồn tại
       if (email) params.email = email;
-      const res = await axios.get(`https://react-app-expense-management-backend.onrender.com/api/total`,
+      const res = await axios.get(`${apiUrl}/total`,
         {
           params
         }
