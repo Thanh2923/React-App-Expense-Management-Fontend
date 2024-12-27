@@ -1,6 +1,6 @@
 import axios from "axios";
 import {  fetchData, addTrackExpense,  editTrackExpense,  deleteTrackExpense } from "./SliceTrackExpense";
-const apiUrl = import.meta.env.VITE_API_URL;  
+const apiUrl = process.env.VITE_API_URL;  
 export function getData({ email, page,limit }) {
   return async (dispatch) => {
     try {

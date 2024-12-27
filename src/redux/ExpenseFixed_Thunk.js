@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addExpenseFixed, editExpenseFixed, deleteExpenseFixed, fetchDataExpenseFixed } from './SliceExpenseFixed';
-const apiUrl = import.meta.env.VITE_API_URL;  
+const apiUrl = process.env.VITE_API_URL;  
 export function getDataExpenseFixed(email) {
   return async (dispatch) => {
     try {
