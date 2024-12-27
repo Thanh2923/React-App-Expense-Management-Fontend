@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { GiTakeMyMoney,GiMoneyStack ,GiBanknote  } from "react-icons/gi";
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotalExpenseFixedByEmail } from '../../../redux/total_Thunk';
+import { getTotalExpenseFixedByEmail } from '../../../redux/Total_Thunk';
 const StatisticsDay = () => {
     const dispatch = useDispatch();
     const [user,setUser] =  useState(null)
