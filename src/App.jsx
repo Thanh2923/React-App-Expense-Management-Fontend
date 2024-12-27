@@ -4,6 +4,8 @@ import MainHome from "./MainHome";
 import LoginGoogle from "./loginGoogle";
 
 function App() {
+ const API_URL = import.meta.env.VITE_API_URL;
+ console.log(API_URL)
     const location = useLocation();
     return (
    <>
