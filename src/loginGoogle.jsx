@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import jwtDecode from 'jwt-decode'; // Không cần destructure jwtDecode
+import {jwtDecode} from 'jwt-decode'; // Không cần destructure jwtDecode
 import axios from 'axios'; // Đảm bảo bạn đã import axios
 import { useNavigate } from "react-router-dom"; // Đúng tên "react-router-dom"
 
