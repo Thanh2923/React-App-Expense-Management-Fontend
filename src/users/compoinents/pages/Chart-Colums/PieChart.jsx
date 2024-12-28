@@ -111,9 +111,9 @@ const PieChart = () => {
   };
 
   return (
-    <div style={{ width: '100%', margin: '0 auto' }}>
+    <div className='w-full lg:w-[70%]' style={{ margin: '0 auto' }}>
       <h2 className='text-left mt-3'>Biểu đồ chi tiêu theo danh mục</h2>
-      <Pie data={spendingData} options={options} />
+      <Pie className='mb-10' data={spendingData} o  ptions={options} />
     </div>
   );
 };

@@ -97,7 +97,7 @@ const SpendingChart = () => {
   return (
    
     <div style={{ width: '100%', margin: '0 auto' }}>
-      <h2 className='text-left'>Biểu đồ chi tiêu theo ngày</h2>
+      <h2 className='text-left mt-3'>Biểu đồ chi tiêu theo ngày</h2>
       <Line data={spendingData} options={options} />
     </div>
   );

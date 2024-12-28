@@ -37,8 +37,8 @@ const StatisticsDay = () => {
         <div className=' w-full py-3 border-b-[1px] '>
           <h3 className='text-lg font-bold uppercase'>Thống kê chi tiêu hàng ngày</h3>
         </div>
-       <div className='w-full flex items-center'>
-       <div className='w-[25%] py-4 items-center gap-2 flex'>
+       <div className='w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  items-center'>
+       <div className=' py-4 items-center gap-2 flex'>
         <div className='w-10 h-10 flex justify-center items-center rounded-full bg-red-500'>
         <MdOutlineAttachMoney className='text-white text-lg' />
         </div>
@@ -50,7 +50,7 @@ const StatisticsDay = () => {
 
         </div>
 
-        <div className='w-[25%] py-4 items-center gap-2 flex'>
+        <div className=' py-4 items-center gap-2 flex'>
         <div className='w-10 h-10 flex justify-center items-center rounded-full bg-orange-500'>
         <GiBanknote className='text-white text-lg' />
         </div>
@@ -62,7 +62,7 @@ const StatisticsDay = () => {
 
         </div>
 
-        <div className='w-[25%] py-4 items-center gap-2 flex'>
+        <div className=' py-4 items-center gap-2 flex'>
         <div className='w-10 h-10 flex justify-center items-center rounded-full bg-green-500'>
         <GiTakeMyMoney className='text-white text-lg' />
         </div>
@@ -75,7 +75,7 @@ const StatisticsDay = () => {
 
         </div>
 
-        <div className='w-[23%] py-4 items-center gap-2 flex'>
+        <div className=' py-4 items-center gap-2 flex'>
         <div className='w-10 h-10 flex justify-center items-center rounded-full bg-blue-500'>
         <GiMoneyStack className='text-white text-lg' />
         </div>

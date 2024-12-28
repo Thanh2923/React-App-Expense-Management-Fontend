@@ -7,14 +7,14 @@ const MainHome = () => {
   return (
     <div className='w-[90%]  m-auto flex flex-col justify-center items-center'>
          <StatisticsDay/>
-        <div className='w-full mt-3 bg-white flex '>
-        <div className='w-[60%]'>
-        <SpendingChart/>
-        </div>
-        <div className='w-40%'>
-            <PieChart/>
-        </div>
-        </div>
+        <div className='w-full mt-3 flex justify-center  bg-white  '>
+<div className='w-[90%] grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2'>
+<SpendingChart/>
+       
+       <PieChart/>
+</div>
+       
+       </div>
     </div>
   )
 }

@@ -103,7 +103,7 @@ console.log(formattedDate); // In ra ngày cách đây 10 ngày
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="relative w-[40%] mx-auto bg-white shadow-md rounded-md p-6">
+      <div className="relative lg:w-[40%] w-[70%] mx-auto bg-white shadow-md rounded-md p-6">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl font-semibold"

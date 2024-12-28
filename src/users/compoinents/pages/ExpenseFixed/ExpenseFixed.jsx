@@ -70,7 +70,7 @@ const ExpenseFixed = () => {
 
   return (
     
-    <div className="container mx-auto p-4">
+    <div className="container lg:text-md text-sm mx-auto p-4">
       <ToastContainer/>
       <LoginReminder isVisible={isVisible} setIsVisible={setIsVisible}/>
 
