@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import ConfirmDelete from '../ConfirmDelete';
 import LoginReminder from '../LoginReminder';
+import Nothing from '../nothing';
 const ExpenseFixed = () => {
   const [user,setUser] =  useState(null)
   const [showForm, setShowForm] = useState(false);
@@ -97,7 +98,7 @@ const ExpenseFixed = () => {
           onClose={() => setShowEditForm(false)}
         />
       )}
-      <table className="min-w-full bg-white">
+  {expenseFixed  && expenseFixed?.length > 0 ?      <table className="min-w-full bg-white">
         <thead className="bg-slate-600 text-white">
           <tr>
             <th className="w-1/4 py-2">ID</th>
@@ -149,7 +150,7 @@ const ExpenseFixed = () => {
           ))}
           
         </tbody>
-      </table>
+      </table> : <Nothing/> }
     </div>
   );
 };

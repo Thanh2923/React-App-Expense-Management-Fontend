@@ -13,7 +13,7 @@ function App() {
     {location.pathname === '/' && <MainHome/>}
   
    <Outlet/>
-  
+    
     </div>
   </div>
   

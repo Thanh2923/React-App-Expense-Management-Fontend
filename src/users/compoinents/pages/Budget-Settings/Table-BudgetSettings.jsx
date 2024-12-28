@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import ConfirmDelete from '../ConfirmDelete';
 import LoginReminder from '../LoginReminder';
+import Nothing from '../nothing';
 const TableBudgetSettings = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingExpense, setEditingExpense] = useState(null);
@@ -94,7 +95,7 @@ const TableBudgetSettings = () => {
           onSave={handleSave}
         />
       )}
-      <table className={`min-w-full bg-white ${showForm || editingExpense ? 'opacity-50' : ''}`}>
+   {budgetSettings  && budgetSettings?.length > 0 ?    <table className={`min-w-full bg-white ${showForm || editingExpense ? 'opacity-50' : ''}`}>
         <thead className="bg-slate-600 text-white">
           <tr>
             <th className="w-1/7 py-2">ID</th>
@@ -144,7 +145,7 @@ const TableBudgetSettings = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> : <Nothing/> }
     </div>
   );
 };

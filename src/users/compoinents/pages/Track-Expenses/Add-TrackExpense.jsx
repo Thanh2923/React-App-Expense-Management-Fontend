@@ -16,11 +16,15 @@ const AddTrackExpense = ({ onClose }) => {
 
   // Lấy ngày hiện tại và cài đặt ngày mặc định
   const currentDate = new Date().toISOString().split('T')[0]; // format: YYYY-MM-DD
-  const currentDateH = new Date(); // Ngày hiện tại
-const tenDaysAgo = new Date(currentDateH); // Tạo bản sao ngày hiện tại
-tenDaysAgo.setDate(currentDate.getDate() - 10); // Lùi lại 10 ngày
+  let today = new Date();
 
-const formattedDate = tenDaysAgo.toISOString().split('T')[0]; // Định dạng YYYY-MM-DD
+  // Trừ 10 ngày từ ngày hiện tại
+  today.setDate(today.getDate() - 10);
+  
+const formattedDate = today.toISOString().split('T')[0]; // Định dạng YYYY-MM-DD
+
+console.log(formattedDate); // In ra ngày cách đây 10 ngày
+
   const [expenseName, setExpenseName] = useState('');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState(currentDate);

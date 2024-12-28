@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import ConfirmDelete from '../ConfirmDelete';
 import LoginReminder from '../LoginReminder';
+import Nothing from '../nothing';
 
 const TableCategorys = () => {
   const [user,setUser] =  useState(null)
@@ -94,7 +95,7 @@ const TableCategorys = () => {
       {showEditForm && <EditCategory expense={currentExpense} onClose={() => setShowEditForm(false)} />}
       {showForm && <AddCategory onClose={() => setShowForm(false)} />}
 
-      <table className="min-w-full bg-white">
+      {Category  && Category?.length > 0 ?    <table className="min-w-full bg-white">
         <thead className="bg-slate-600 text-white">
           <tr>
             <th className="w-1/7 py-2">ID</th>
@@ -143,7 +144,7 @@ const TableCategorys = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> : <Nothing/> }
     </div>
   );
 };

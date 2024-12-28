@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import ConfirmDelete from '../ConfirmDelete';
 import Pagination from '../Pagination';
 import LoginReminder from '../LoginReminder';
+import Nothing from '../nothing';
 
   const TableExpense = () => {
     const navigate = useNavigate();
@@ -66,6 +67,8 @@ import LoginReminder from '../LoginReminder';
       closeModal();
     };
 
+
+
     return (
 
       <div className="container mx-auto p-4">
@@ -95,7 +98,7 @@ import LoginReminder from '../LoginReminder';
            
           />
         )}
-        <table className={`min-w-full bg-white ${showForm || editingExpense ? 'opacity-50' : ''}`}>
+{expenseFixed  && expenseFixed?.data?.length > 0 ? <table className={`min-w-full bg-white ${showForm || editingExpense ? 'opacity-50' : ''}`}>
           <thead className="bg-slate-600 text-white">
             <tr>
               <th className="w-1/7 py-2">ID</th>
@@ -153,8 +156,8 @@ import LoginReminder from '../LoginReminder';
             ))}
           </tbody>
         
-          
-        </table>
+        </table> : <Nothing/> }
+
        <div className='w-full mt-5'>
        <Pagination
         
