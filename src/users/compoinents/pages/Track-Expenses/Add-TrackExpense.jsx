@@ -16,6 +16,11 @@ const AddTrackExpense = ({ onClose }) => {
 
   // Lấy ngày hiện tại và cài đặt ngày mặc định
   const currentDate = new Date().toISOString().split('T')[0]; // format: YYYY-MM-DD
+  const currentDateH = new Date(); // Ngày hiện tại
+const tenDaysAgo = new Date(currentDateH); // Tạo bản sao ngày hiện tại
+tenDaysAgo.setDate(currentDate.getDate() - 10); // Lùi lại 10 ngày
+
+const formattedDate = tenDaysAgo.toISOString().split('T')[0]; // Định dạng YYYY-MM-DD
   const [expenseName, setExpenseName] = useState('');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState(currentDate);
@@ -143,7 +148,7 @@ const AddTrackExpense = ({ onClose }) => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              min={currentDate} // Ngày không được nhỏ hơn ngày hiện tại
+              min={formattedDate} // Ngày không được nhỏ hơn ngày hiện tại
             />
             {dateError && <p className="text-red-500 text-sm">{dateError}</p>}
           </div>
