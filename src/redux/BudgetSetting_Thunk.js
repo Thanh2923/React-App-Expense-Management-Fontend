@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { addBudgetSetting, deleteBudgetSetting, editBudgetSetting, fetchBudgetSettings } from "./SliceBudgetSetting";
-const apiUrl = process.env.VITE_API_URL;  
+const apiUrl = import.meta.env.VITE_API_URL;  
 export function getBudgetSettings(email) {
   return async (dispatch) => {
     try {
