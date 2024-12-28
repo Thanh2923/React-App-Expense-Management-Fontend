@@ -43,7 +43,7 @@ const Sidebar = () => {
     <nav className="bg-[#0099FF]  relative  lg:fixed top-0 left-0  text-white p-4  w-full ">
       <div className='menu '>
       <AiOutlineBars onClick={handleShowForm} className='font-bold block  cursor-pointer lg:hidden text-white text-3xl' />
-        {isShowForm &&  <div className=' top-0 left-0 w-[40%] z-20 shadow-sm  fixed h-[100vh] bg-white ' >
+        {isShowForm &&  <div className=' top-0 left-0 w-[55%] z-20 shadow-sm  fixed h-[100vh] bg-white ' >
         <ul className=" py-5 relative text-black ">
         <div onClick={handleCloseForm} className='w-5 h-5 cursor-pointer bg-slate-50 flex justify-center items-center absolute top-5 right-5'>
         <AiOutlineLeft  className='font-bold text-lg'/>
